@@ -1,0 +1,21 @@
+.search-input {
+    width: 600px;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
+}
+
+.search-btn {
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+    width: 60px;
+}
+
+.song_body {
+    width: 100%;
+    height: 600px;
+}
+
+.play_bar {
+    width: 100%;
+    height: 100px;
+}
