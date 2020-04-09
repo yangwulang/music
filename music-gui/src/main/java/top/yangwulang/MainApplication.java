@@ -6,7 +6,7 @@ import top.yangwulang.swings.ui.CustomizeJavaFrame;
 /**
  * @author yangwulang
  */
-public class Appcations {
+public class MainApplication {
     public static void main(String[] args) {
         CustomizeJavaFrame customizeJavaFrame = new CustomizeJavaFrame();
         customizeJavaFrame.setSize(1000, 500);

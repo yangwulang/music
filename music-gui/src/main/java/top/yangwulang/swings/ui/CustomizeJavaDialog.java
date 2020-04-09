@@ -14,7 +14,7 @@ import java.awt.event.MouseEvent;
  * @author yangwulang
  */
 public class CustomizeJavaDialog extends JDialog {
-    private CustomizeJavaFrame customizeJavaFrame = new CustomizeJavaFrame();
+    private final CustomizeJavaFrame customizeJavaFrame = new CustomizeJavaFrame();
     private CustomizeJavaButton ok, cancel;
     private String bodyMessage;
 

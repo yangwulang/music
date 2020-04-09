@@ -11,8 +11,9 @@ import java.awt.event.*;
  * @author yangwulang
  */
 public class CustomizeJavaFrame extends JFrame implements Window {
-    private Point org = new Point();
-    private JFrame frame = this;
+    private final Point org = new Point();
+    private final JFrame frame = this;
+    private final JPanel panel = new JPanel();
     private int thisWidth = 0;
     private int thisHeight = 0;
     private Fragment fragment;
@@ -21,7 +22,6 @@ public class CustomizeJavaFrame extends JFrame implements Window {
      */
     private boolean maxButtonIsClicked = false;
     private String title = "";
-    private JPanel panel = new JPanel();
     private JLabel titleLabel;
 
     private CustomizeJavaButton min;
@@ -41,9 +41,11 @@ public class CustomizeJavaFrame extends JFrame implements Window {
         this.thisHeight = height;
     }
 
-
+    /**
+     * 初始化面板，设置面板在最中间，能拖动，整体样式
+     */
     private void init() {
-        getRootPane().setBorder(new CustomizeJavaBorder(new Color(0,255,0)));
+        getRootPane().setBorder(new CustomizeJavaBorder(new Color(0, 255, 0)));
         setFrameCenter();
         setCanMove();
         writeTopPanel();
@@ -61,6 +63,17 @@ public class CustomizeJavaFrame extends JFrame implements Window {
         startToPrintMainBody(fragment, TitleButton.OTHER);
     }
 
+    /**
+     * 启动重写主面板，实现{@link Fragment}或者直接将{@link Fragment}进行new,
+     * 重写里面的{@link Fragment#print(JFrame)}方法进行改写注面板
+     *
+     * @param fragment    主面板接口
+     * @param titleButton 禁用三个主要面板中的一个，使之变成灰色并且无功能，有
+     *                    <br>{@link TitleButton#MIN}最小化</br>
+     *                    <br>{@link TitleButton#MAX}最大化</br>
+     *                    <br>{@link TitleButton#CLOSE}关闭</br>
+     *                    <br>{@link TitleButton#OTHER}其他按钮，如果不禁用可使用此枚举</br>
+     */
     public void startToPrintMainBody(Fragment fragment, TitleButton titleButton) {
         enableTitleButton(titleButton);
         init();
@@ -74,6 +87,9 @@ public class CustomizeJavaFrame extends JFrame implements Window {
         this.title = title;
     }
 
+    /**
+     * 写入主要外形框架例如上界面面板和整体的面板样式
+     */
     private void writeTopPanel() {
         FlowLayout flowLayout = new FlowLayout(FlowLayout.RIGHT);
 
@@ -98,8 +114,6 @@ public class CustomizeJavaFrame extends JFrame implements Window {
         panel.setLayout(flowLayout);
         panel.setPreferredSize(new Dimension(thisWidth, 40));
 
-
-//        mainPanel.add(panel,BorderLayout.NORTH);
         this.add(panel, BorderLayout.NORTH);
     }
 

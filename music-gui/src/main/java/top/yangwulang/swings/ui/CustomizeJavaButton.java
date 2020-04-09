@@ -16,10 +16,10 @@ import java.awt.geom.RoundRectangle2D;
  */
 public class CustomizeJavaButton extends JButton implements BaseButton {
     private boolean hover;
-    private int style;
+    private final int style;
     private int width;
     private int height;
-    private int radius;
+    private final int radius;
     private float options = 0F;
     private Color foreGround;
     private Color backGround;
