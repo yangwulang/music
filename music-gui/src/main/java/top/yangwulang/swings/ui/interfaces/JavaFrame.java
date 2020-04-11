@@ -27,5 +27,10 @@ public interface JavaFrame {
      */
     CustomizeJavaButton getCloseButton();
 
+    /**
+     * 设置窗口禁用
+     *
+     * @param v 禁用为true,不禁用为false
+     */
     void setEnabled(boolean v);
 }
