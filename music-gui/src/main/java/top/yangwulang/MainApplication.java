@@ -3,6 +3,7 @@ package top.yangwulang;
 import top.yangwulang.swings.ui.CustomizeJavaDialog;
 import top.yangwulang.swings.ui.CustomizeJavaFrame;
 
+
 /**
  * @author yangwulang
  */
@@ -15,7 +16,8 @@ public class MainApplication {
 
         });
         customizeJavaFrame.setVisible(true);
-        CustomizeJavaDialog dialog = new CustomizeJavaDialog("你好");
+        CustomizeJavaDialog dialog = new CustomizeJavaDialog("你好", customizeJavaFrame);
+        dialog.setModal(true);
         dialog.showDialog();
     }
 }

@@ -23,7 +23,7 @@ public class CustomizeJavaBorder extends AbstractBorder {
     @Override
     public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
         g.setColor(color);
-        g.drawRoundRect(0, 0, c.getWidth() - 10, c.getHeight() - 1, 12, 10);
+        g.drawRoundRect(0, 0, c.getWidth() - 10, c.getHeight() - 1, 12, 12);
     }
 
 }

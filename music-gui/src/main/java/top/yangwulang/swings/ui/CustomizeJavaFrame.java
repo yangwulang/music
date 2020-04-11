@@ -1,6 +1,7 @@
 package top.yangwulang.swings.ui;
 
 import top.yangwulang.swings.ui.interfaces.Fragment;
+import top.yangwulang.swings.ui.interfaces.JavaFrame;
 import top.yangwulang.swings.ui.interfaces.Window;
 
 import javax.swing.*;
@@ -10,7 +11,7 @@ import java.awt.event.*;
 /**
  * @author yangwulang
  */
-public class CustomizeJavaFrame extends JFrame implements Window {
+public class CustomizeJavaFrame extends JFrame implements Window, JavaFrame {
     private final Point org = new Point();
     private final JFrame frame = this;
     private final JPanel panel = new JPanel();
@@ -50,6 +51,7 @@ public class CustomizeJavaFrame extends JFrame implements Window {
         setCanMove();
         writeTopPanel();
     }
+
 
     /**
      * 窗口居中
@@ -140,6 +142,14 @@ public class CustomizeJavaFrame extends JFrame implements Window {
         maxMouseListener();
         minMouseListener();
         closeMouseListener();
+    }
+
+    @Override
+    public void paintComponents(Graphics g) {
+        Graphics2D graphics2D = (Graphics2D) g;
+        graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        graphics2D.drawRoundRect(0, 0, getWidth() - 2, getHeight() - 2, 15, 15);
+        super.paintComponents(g);
     }
 
     private void maxMouseListener() {
@@ -247,5 +257,25 @@ public class CustomizeJavaFrame extends JFrame implements Window {
                 closeMouseListener();
                 break;
         }
+    }
+
+    @Override
+    public CustomizeJavaButton getMinButton() {
+        return this.min;
+    }
+
+    @Override
+    public CustomizeJavaButton getMaxButton() {
+        return this.max;
+    }
+
+    @Override
+    public CustomizeJavaButton getCloseButton() {
+        return this.close;
+    }
+
+    @Override
+    public void setEnabled(boolean v) {
+        super.setEnabled(v);
     }
 }
