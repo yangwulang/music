@@ -106,6 +106,11 @@ public class CustomizeJavaButton extends JButton implements BaseButton {
         this.options = options;
     }
 
+    /**
+     * 获得按钮的透明度
+     *
+     * @return 按钮的透明度
+     */
     public float getOptions() {
         return this.options;
     }
@@ -177,7 +182,7 @@ public class CustomizeJavaButton extends JButton implements BaseButton {
         graphics2D.setPaint(p1);
         graphics2D.drawRoundRect(0, 0, width - 1, height - 1, radius, radius);
         graphics2D.setPaint(p2);
-        graphics2D.drawRoundRect(1, 1, width - 3, height - 3, 10, 10);
+        graphics2D.drawRoundRect(1, 1, width - 3, height - 3, radius, radius);
     }
 
     private void leftRoundRect(Graphics2D graphics2D, GradientPaint p1, GradientPaint p2) {
@@ -190,7 +195,7 @@ public class CustomizeJavaButton extends JButton implements BaseButton {
         graphics2D.setPaint(p1);
         graphics2D.drawRoundRect(0, 0, (width - 1) + 20, height - 1, radius, radius);
         graphics2D.setPaint(p2);
-        graphics2D.drawRoundRect(1, 1, (width - 3) + 20, height - 3, 18, 18);
+        graphics2D.drawRoundRect(1, 1, (width - 3) + 20, height - 3, radius, radius);
         graphics2D.setPaint(p1);
         graphics2D.drawLine(width - 1, 1, width - 1, height);
         graphics2D.setPaint(p2);
@@ -207,7 +212,7 @@ public class CustomizeJavaButton extends JButton implements BaseButton {
         graphics2D.setPaint(p1);
         graphics2D.drawRoundRect(-20, 0, (width - 1) + 20, height - 1, radius, radius);
         graphics2D.setPaint(p2);
-        graphics2D.drawRoundRect(-19, 1, (width - 3) + 20, height - 3, 18, 18);
+        graphics2D.drawRoundRect(-19, 1, (width - 3) + 20, height - 3, radius, radius);
         graphics2D.setPaint(p1);
         graphics2D.drawLine(0, 1, 0, height);
         graphics2D.setPaint(p2);

@@ -9,12 +9,13 @@ import java.awt.geom.RoundRectangle2D;
  * @author yangwulang
  */
 @FunctionalInterface
-public interface Fragment {
+public interface Fragment extends ComponentFragment<JFrame> {
     /**
      * 在当前的JFrame中添加控件
      *
      * @param frame 待添加控件的JFrame
      */
+    @Override
     void print(JFrame frame);
 
     /**

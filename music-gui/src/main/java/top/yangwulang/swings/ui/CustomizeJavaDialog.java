@@ -1,5 +1,7 @@
 package top.yangwulang.swings.ui;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import top.yangwulang.swings.ui.interfaces.BaseButton;
 import top.yangwulang.swings.ui.interfaces.Fragment;
 import top.yangwulang.swings.ui.interfaces.JavaFrame;
@@ -16,6 +18,7 @@ import java.awt.event.MouseEvent;
  */
 public class CustomizeJavaDialog extends JDialog {
     private final CustomizeJavaFrame customizeJavaFrame = new CustomizeJavaFrame();
+    private final Logger log = LoggerFactory.getLogger(CustomizeJavaFrame.class);
     private final CustomizeJavaDialog dialog = this;
     private final JavaFrame superFrame;
     private CustomizeJavaButton ok, cancel;
@@ -153,13 +156,14 @@ public class CustomizeJavaDialog extends JDialog {
     @Override
     @Deprecated
     public void show() {
+        log.info(this.getClass() + "娃，你是看不到注释么？方法没得用了");
     }
 
     @Override
     public void setModal(boolean modal) {
         customizeJavaFrame.setAlwaysOnTop(true);
-        System.out.println(modal);
         superFrame.setEnabled(false);
+        log.info(this.getClass() + "  ===> 设置模态框，主窗口禁用");
     }
 
     /**
@@ -167,6 +171,8 @@ public class CustomizeJavaDialog extends JDialog {
      */
     public void close() {
         superFrame.setEnabled(true);
+        log.info(this.getClass() + "  ===> 解除主窗口禁用");
         customizeJavaFrame.dispose();
+        log.info(this.getClass() + "  ===> 消息框关闭");
     }
 }

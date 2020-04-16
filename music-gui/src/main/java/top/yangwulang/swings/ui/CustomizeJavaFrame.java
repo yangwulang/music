@@ -1,5 +1,7 @@
 package top.yangwulang.swings.ui;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import top.yangwulang.swings.ui.interfaces.Fragment;
 import top.yangwulang.swings.ui.interfaces.JavaFrame;
 import top.yangwulang.swings.ui.interfaces.Window;
@@ -9,12 +11,20 @@ import java.awt.*;
 import java.awt.event.*;
 
 /**
+ * 请先设置大小然后在重写主面板,同时使用
+ * <p>
+ * IntelliJTheme.install(MainApplication.class.getResourceAsStream("/json/light.json"));<br>
+ * UIManager.put("Button.arc", 15);
+ * </p>
+ * 开启flatlaf
+ *
  * @author yangwulang
  */
 public class CustomizeJavaFrame extends JFrame implements Window, JavaFrame {
     private final Point org = new Point();
     private final JFrame frame = this;
     private final JPanel panel = new JPanel();
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
     private int thisWidth = 0;
     private int thisHeight = 0;
     private Fragment fragment;
@@ -50,6 +60,7 @@ public class CustomizeJavaFrame extends JFrame implements Window, JavaFrame {
         setFrameCenter();
         setCanMove();
         writeTopPanel();
+        log.info(this.getClass() + " ==>  窗口被创建");
     }
 
 
@@ -138,6 +149,9 @@ public class CustomizeJavaFrame extends JFrame implements Window, JavaFrame {
 
     }
 
+    /**
+     * 默认三个按钮事件全部执行
+     */
     private void setListener() {
         maxMouseListener();
         minMouseListener();
@@ -162,10 +176,14 @@ public class CustomizeJavaFrame extends JFrame implements Window, JavaFrame {
                     setFrameCenter();
                     setTitleLabel(thisWidth - ((min.getPreferredSize().width + 30) * 4));
                     frame.setPreferredSize(new Dimension(thisWidth, thisHeight));
+                    log.info(this.getClass() + " ==>窗口最大化复原  上标题size : {} 最大化按钮是否被点过 : {}",
+                            (WINDOW_WIDTH - ((min.getPreferredSize().width + 30) * 4)), maxButtonIsClicked);
                 } else {
                     maxButtonIsClicked = true;
                     setTitleLabel(WINDOW_WIDTH - ((min.getPreferredSize().width + 30) * 4));
                     frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                    log.info(this.getClass() + " ==>窗口最大化  上标题size : {} 最大化按钮是否被点过 : {}",
+                            (WINDOW_WIDTH - ((min.getPreferredSize().width + 30) * 4)), maxButtonIsClicked);
                 }
                 fragment.setFrameFillet(frame, 30D);
             }
@@ -176,6 +194,7 @@ public class CustomizeJavaFrame extends JFrame implements Window, JavaFrame {
         min.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                log.info(this.getClass() + " ==> 窗口最小化");
                 frame.setExtendedState(JFrame.ICONIFIED);
             }
         });
@@ -185,6 +204,7 @@ public class CustomizeJavaFrame extends JFrame implements Window, JavaFrame {
         close.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                log.info(this.getClass() + " ==> 窗口被销毁");
                 frame.dispose();
             }
         });
@@ -252,9 +272,7 @@ public class CustomizeJavaFrame extends JFrame implements Window, JavaFrame {
                 min = new CustomizeJavaButton(CustomizeJavaButton.ROUND_RECT, 0.5F, 20, new Color(0, 255, 0), new Color(127, 255, 0));
                 max = new CustomizeJavaButton(CustomizeJavaButton.ROUND_RECT, 0.5F, 20, new Color(255, 227, 132), new Color(255, 128, 0));
                 close = new CustomizeJavaButton(CustomizeJavaButton.ROUND_RECT, 0.5F, 20, new Color(255, 0, 0), new Color(255, 127, 80));
-                minMouseListener();
-                maxMouseListener();
-                closeMouseListener();
+                setListener();
                 break;
         }
     }
@@ -277,5 +295,12 @@ public class CustomizeJavaFrame extends JFrame implements Window, JavaFrame {
     @Override
     public void setEnabled(boolean v) {
         super.setEnabled(v);
+    }
+
+    private class DefaultFragment implements Fragment {
+        @Override
+        public void print(JFrame frame) {
+
+        }
     }
 }
