@@ -1,21 +1,25 @@
 package top.yangwulang;
 
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+import org.apache.log4j.BasicConfigurator;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScans;
 import top.yangwulang.panels.*;
 import top.yangwulang.swings.ui.*;
 import top.yangwulang.swings.ui.annotation.AutowiredFrame;
 
 import javax.swing.*;
 import java.awt.*;
-import java.net.URL;
 
 /**
  * Hello world!
  *
  * @author yangwulang
  */
+@ComponentScans(value = {
+        @ComponentScan("top.yangwulang.services"),
+        @ComponentScan("top.yangwulang.config")
+})
 public class PlayerMainPanel {
     @AutowiredFrame(width = 1300, height = 800, frameName = "frame")
     private static CustomizeJavaFrame frames;
@@ -23,7 +27,7 @@ public class PlayerMainPanel {
     public PlayerMainPanel() {
         frames.startToPrintMainBody(frame -> {
             ConfigurableListableBeanFactory beanFactory = StartApplicationFactory.getContext().getBeanFactory();
-
+            beanFactory.registerSingleton("PlayerMainPanel", frames);
             CardLayout centerLayout = new CardLayout();
 
             //主面板
@@ -38,9 +42,6 @@ public class PlayerMainPanel {
             left.initUi();
             //注入左边面板
             beanFactory.registerSingleton("leftPanel", left);
-
-
-
 
             IndexPanel indexPanel = new IndexPanel();
             //注入首页面板
@@ -70,8 +71,6 @@ public class PlayerMainPanel {
             beanFactory.registerSingleton("centerLayout", centerLayout);
 
             jPanel.add(centerPanel, BorderLayout.CENTER);
-//            jPanel.add(bottomPanel, BorderLayout.SOUTH);
-
             frame.add(jPanel, BorderLayout.CENTER);
             frame.add(left, BorderLayout.WEST);
         });

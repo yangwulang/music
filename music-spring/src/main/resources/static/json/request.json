@@ -3,7 +3,7 @@
     "module": "CDN.SrfCdnDispatchServer",
     "method": "GetCdnDispatch",
     "param": {
-      "guid": "8196006125",
+      "guid": "6676641631",
       "calltype": 0,
       "userip": ""
     }
@@ -12,9 +12,9 @@
     "module": "vkey.GetVkeyServer",
     "method": "CgiGetVkey",
     "param": {
-      "guid": "8196006125",
+      "guid": "6676641631",
       "songmid": [
-        "004dFFPd4JNv8q"
+        "@#s#@"
       ],
       "songtype": [
         0

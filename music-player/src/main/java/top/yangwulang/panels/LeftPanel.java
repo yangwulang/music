@@ -78,13 +78,6 @@ public class LeftPanel extends CustomizeJavaPanel {
             public void mouseClicked(MouseEvent e) {
                 CardLayout centerLayout = context.getBean("centerLayout", CardLayout.class);
                 JPanel centerPanel = context.getBean("centerPanel", JPanel.class);
-                PlatformImpl.startup(()->{
-                    URL resource = PlayerMainPanel.class.getResource("/music/魔鬼中的天使.m4a");
-                    System.out.println(resource.toString());
-                    Media media = new Media(resource.toString());
-                    MediaPlayer player = new MediaPlayer(media);
-                    player.play();
-                });
                 centerLayout.show(centerPanel, "aboutPanel");
             }
         });

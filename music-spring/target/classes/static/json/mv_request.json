@@ -1,0 +1,21 @@
+{
+  "getMvUrl": {
+    "module": "gosrf.Stream.MvUrlProxy",
+    "method": "GetMvUrls",
+    "param": {
+      "vids": [
+        "%s"
+      ],
+      "request_typet": 10001,
+      "addrtype": 3
+    }
+  },
+  "comm": {
+    "ct": 24,
+    "cv": 4747474,
+    "g_tk": 26278195,
+    "uin": 0,
+    "format": "json",
+    "platform": "yqq"
+  }
+}
