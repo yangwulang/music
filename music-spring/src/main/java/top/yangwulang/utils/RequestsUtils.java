@@ -1,11 +1,9 @@
 package top.yangwulang.utils;
 
-import okhttp3.Callback;
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
+import okhttp3.*;
 import top.yangwulang.utils.interfaces.RequestInterface;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -13,9 +11,9 @@ import java.util.concurrent.TimeUnit;
  */
 public class RequestsUtils implements RequestInterface {
 
-    private Request.Builder builder = new Request.Builder();
-    private FormBody.Builder bodyBuilder = new FormBody.Builder();
-    private OkHttpClient client = new OkHttpClient().newBuilder()
+    private final Request.Builder builder = new Request.Builder();
+    private final FormBody.Builder bodyBuilder = new FormBody.Builder();
+    private final OkHttpClient client = new OkHttpClient().newBuilder()
             .connectTimeout(5, TimeUnit.SECONDS)
             .readTimeout(5, TimeUnit.SECONDS)
             .build();

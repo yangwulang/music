@@ -9,7 +9,10 @@ import top.yangwulang.services.Test;
 import top.yangwulang.utils.RequestsUtils;
 
 /**
+ * spring的配置类
+ *
  * @author yangwulang
+ * @date 2020/4/19 本来想在其中加入日志，不知何缘故能将Aspect类扫描进spring但是切面无效果(待修复)
  */
 
 @ComponentScans(value = {

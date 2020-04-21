@@ -1,6 +1,5 @@
 package top.yangwulang;
 
-import org.apache.log4j.BasicConfigurator;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScans;
@@ -12,7 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Hello world!
+ * 整个播放器的入口
  *
  * @author yangwulang
  */

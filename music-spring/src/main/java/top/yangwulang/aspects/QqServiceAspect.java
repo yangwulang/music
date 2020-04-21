@@ -1,7 +1,5 @@
 package top.yangwulang.aspects;
 
-import okhttp3.Callback;
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -10,9 +8,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
-import top.yangwulang.pojo.qq.SearchResultSongInfo;
 
 /**
  * @author yangwulang
@@ -23,13 +19,14 @@ import top.yangwulang.pojo.qq.SearchResultSongInfo;
 public class QqServiceAspect {
     private final Logger log = LoggerFactory.getLogger(QqServiceAspect.class);
 
-    @Pointcut("execution(* top.yangwulang.services.QqService.searchSongAllInfo())")
+    @Pointcut("execution(* top.yangwulang.services.QqService.*(..))")
     public void aspectSearch() {
 
     }
-    @Before("aspectSearch()  && args(searchResultSongInfo, callback )")
-    public void before(SearchResultSongInfo searchResultSongInfo, Callback callback){
-        System.out.println(searchResultSongInfo);
+
+    @Before("aspectSearch()")
+    public void before() {
+        System.out.println("前置通知");
     }
 
     @Around("aspectSearch()")

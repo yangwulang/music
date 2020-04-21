@@ -4,6 +4,7 @@ import java.io.*;
 
 /**
  * @author yangwulang
+ * @date 2020/4/19 增加读取资源目录下的文件转化成string
  */
 public class LoadJson {
     /**

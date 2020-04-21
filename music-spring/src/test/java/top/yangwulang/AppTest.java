@@ -9,12 +9,16 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import top.yangwulang.config.BaseConfig;
+import top.yangwulang.jsons.BaseRecommendResultTemplate;
 import top.yangwulang.jsons.BaseSearchResultKey;
+import top.yangwulang.pojo.qq.RecommendResult;
+import top.yangwulang.pojo.qq.RecommendResultData;
 import top.yangwulang.pojo.qq.SearchResultKey;
 import top.yangwulang.pojo.qq.SearchResultSongInfo;
 import top.yangwulang.services.QqService;
 
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * Unit test for simple App.
@@ -48,7 +52,20 @@ public class AppTest {
     public static void main(String[] args) throws IOException {
         ApplicationContext context = new AnnotationConfigApplicationContext(BaseConfig.class);
         QqService service = context.getBean(QqService.class);
-        SearchResultSongInfo info = new SearchResultSongInfo();
+        service.searchRecommend(new BaseRecommendResultTemplate<RecommendResultData>() {
+
+            @Override
+            public void callBack(RecommendResult<RecommendResultData> recommendResultDataRecommendResult, Exception exception) {
+                recommendResultDataRecommendResult.getRecomPlaylist()
+                        .getData()
+                        .getV_hot()
+                        .forEach(vHotBean -> {
+                            System.out.println(vHotBean.getCover());
+                            System.out.println(vHotBean.getTitle());
+                        });
+            }
+        });
+/*        SearchResultSongInfo info = new SearchResultSongInfo();
         info.setSongmid("004dFFPd4JNv8q");
         service.searchSongAllInfo(info, new BaseSearchResultKey() {
             @Override
@@ -56,7 +73,7 @@ public class AppTest {
                 System.out.println(searchResultKey.getReq_0().getData());
                 System.out.println(searchResultKey.getReq_0().getData().getMidurlinfo());
             }
-        });
+        });*/
 //        System.out.println(LoadJson.loadJson());
 /*        service.search("邓紫棋", 1, 10, new BaseSearchResultTemplate<SearchResultData>() {
             @Override
