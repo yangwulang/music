@@ -26,21 +26,23 @@ public class QqServiceAspect {
 
     @Before("aspectSearch()")
     public void before() {
-        System.out.println("前置通知");
+        log.info("前置通知");
     }
 
     @Around("aspectSearch()")
     public Object around(ProceedingJoinPoint point) {
         log.info("============QQ服务层开始进行环绕日志记录============");
-        System.out.println("循环记录");
         Object proceed = null;
         try {
             proceed = point.proceed();
-            log.info(proceed.toString());
+            for (Object arg : point.getArgs()) {
+                log.info("参数 ==> {}", arg);
+            }
         } catch (Throwable throwable) {
             log.info("QQ服务层环绕日志记录 异常 ==>{}", throwable.getMessage());
+            throwable.printStackTrace();
         }
-        log.info("============QQ服务层结束环绕日志记录============");
+        log.info("==============QQ服务层结束环绕日志记录==============");
         return proceed;
     }
 }

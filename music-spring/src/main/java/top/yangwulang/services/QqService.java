@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import top.yangwulang.pojo.qq.RecommendResultData;
 import top.yangwulang.pojo.qq.SearchResultKey;
 import top.yangwulang.pojo.qq.SearchResultSongInfo;
 import top.yangwulang.utils.LoadJson;
@@ -108,6 +109,13 @@ public class QqService {
             e.printStackTrace();
         }
         log.info("查询推荐信息 来自于 searchRecommend 请求地址 ==> {}", url);
+        request.doGet(url, callback);
+    }
+
+    public void searchRecommendDataList(RecommendResultData.DataBean.VHotBean vHotBean, Callback callback) {
+        request.addHead("referer", "https://y.qq.com/n/yqq/playlist/7382629476.html");
+        String url = String.format("https://c.y.qq.com/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg?type=1&json=1&utf8=1&disstid=%s&format=json&inCharset=utf8&outCharset=utf-8", vHotBean.getContent_id());
+        System.out.println(url);
         request.doGet(url, callback);
     }
 }

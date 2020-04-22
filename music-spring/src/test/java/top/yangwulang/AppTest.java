@@ -2,6 +2,9 @@ package top.yangwulang;
 
 import static org.junit.Assert.assertTrue;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
+import com.alibaba.fastjson.parser.Feature;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
@@ -18,7 +21,9 @@ import top.yangwulang.pojo.qq.SearchResultSongInfo;
 import top.yangwulang.services.QqService;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Unit test for simple App.
@@ -36,7 +41,7 @@ public class AppTest {
     @Test
     public void testQqServiceInterface() {
         QqService service = new QqService();
-        service.aboutSearchSong("邓紫棋", new Callback() {
+/*        service.aboutSearchSong("邓紫棋", new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
 
@@ -46,13 +51,36 @@ public class AppTest {
             public void onResponse(Call call, Response response) throws IOException {
                 System.out.println(response.body().string());
             }
-        });
+        });*/
     }
 
     public static void main(String[] args) throws IOException {
         ApplicationContext context = new AnnotationConfigApplicationContext(BaseConfig.class);
         QqService service = context.getBean(QqService.class);
-        service.searchRecommend(new BaseRecommendResultTemplate<RecommendResultData>() {
+        RecommendResultData.DataBean.VHotBean vHotBean = new RecommendResultData.DataBean.VHotBean();
+        vHotBean.setContent_id("7382629476");
+        service.searchRecommendDataList(vHotBean, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String string = response.body().string();
+                Map<String, String> stringObjectMap = JSON.parseObject(string, new TypeReference<Map<String, String>>() {
+                }, Feature.OrderedField);
+                List<String> cdlist = JSON.parseObject(stringObjectMap.get("cdlist"), new TypeReference<List<String>>() {
+                });
+                Map<String, String> stringStringMap = JSON.parseObject(cdlist.get(0), new TypeReference<Map<String, String>>() {
+                });
+                String songlist = stringStringMap.get("songlist");
+                List<SearchResultSongInfo> searchResultSongInfos = JSON.parseObject(songlist, new TypeReference<List<SearchResultSongInfo>>() {
+                });
+                System.out.println(searchResultSongInfos.size());
+            }
+        });
+        /*service.searchRecommend(new BaseRecommendResultTemplate<RecommendResultData>() {
 
             @Override
             public void callBack(RecommendResult<RecommendResultData> recommendResultDataRecommendResult, Exception exception) {
@@ -64,7 +92,7 @@ public class AppTest {
                             System.out.println(vHotBean.getTitle());
                         });
             }
-        });
+        });*/
 /*        SearchResultSongInfo info = new SearchResultSongInfo();
         info.setSongmid("004dFFPd4JNv8q");
         service.searchSongAllInfo(info, new BaseSearchResultKey() {

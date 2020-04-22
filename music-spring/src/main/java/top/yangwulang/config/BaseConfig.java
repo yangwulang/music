@@ -3,6 +3,7 @@ package top.yangwulang.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScans;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import top.yangwulang.aspects.QqServiceAspect;
 import top.yangwulang.services.QqService;
 import top.yangwulang.services.Test;
@@ -18,6 +19,7 @@ import top.yangwulang.utils.RequestsUtils;
 @ComponentScans(value = {
         @ComponentScan("top.yangwulang.aspects")
 })
+@EnableAspectJAutoProxy(exposeProxy = true)
 public class BaseConfig {
     /**
      * 构造请求工具类，将其注入到spring中

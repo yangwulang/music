@@ -53,7 +53,7 @@ public class RecommendResultData {
              */
 
             private String album_pic_mid;
-            private long content_id;
+            private String content_id;
             private String cover;
             private long creator;
             private String edge_mark;

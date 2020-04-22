@@ -33,7 +33,6 @@ public class CustomizeJavaImagePanel extends JPanel implements BasePanel {
     @Override
     public void initUi() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
         CustomizeJavaLabel customizeJavaLabel = new CustomizeJavaLabel(imgPath, width - 30, height - 30, radius);
         customizeJavaLabel.setPreferredSize(new Dimension(width - 30, height - 30));
         JPanel mainPanel = new JPanel();
